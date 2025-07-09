@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Weather Widget</title>
+<style>
+  /* Load custom fonts */
+  @font-face {
+    font-family: 'Josefin Sans Bold';
+    src: url('./Fonts/Josefin_Sans/Static/JosefinSans-Bold.ttf') format('truetype');
+    font-weight: bold;
+  }
+
+  @font-face {
+    font-family: 'Public Sans';
+    src: url('./Fonts/Public_Sans/static/PublicSans-Regular.ttf') format('truetype');
+    font-weight: normal;
+  }
+
+  body {
+    font-family: 'Public Sans', sans-serif;
+    color: #fff;
+    padding: 1rem;
+    background: #f3eece;
+  }
+
+  #weather-widget {
+    display: flex;
+    flex-direction: column;
+    background: #4d4318;
+    padding: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    max-width: 320px;
+  }
+
+  #weather-widget h2 {
+    font-family: 'Josefin Sans Bold', sans-serif;
+    margin: 0 0 0.5rem 0;
+    font-size: 1.3rem;
+    color: #fff;
+  }
+
+  .weather-content {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .weather-icon {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .weather-icon img {
+    width: 60px;
+    height: 60px;
+  }
+
+  .weather-observations {
+    font-size: 0.9rem;
+    line-height: 1.4;
+  }
+
+  #alerts {
+    font-size: 0.85rem;
+    margin-top: 1rem;
+    color: #ffe8a5;
+  }
+
+  #alerts a {
+    color: #ffe8a5;
+    text-decoration: underline;
+    cursor: pointer;
+  }
+
+  .modal {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal.hidden {
+  display: none;
+}
+
+.modal-content {
+  background: #fff;
+  color: #000;
+  padding: 1rem;
+  max-width: 300px;
+  border-radius: 6px;
+  position: relative;
+  font-size: 0.9rem;
+}
+
+#close-modal {
+  position: absolute;
+  top: 0.3rem;
+  right: 0.5rem;
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+
+</style>
+
+</head>
+<body>
+  <div id="weather-widget">
+  <h2>Caballero County Parks</h2>
+  <div class="weather-content">
+    <div class="weather-icon">
+      <img id="icon" alt="Weather Icon" />
+    </div>
+    <div class="weather-observations">
+      <div id="desc">Loading...</div>
+      <div id="temp"></div>
+      <div id="dew"></div>
+    </div>
+  </div>
+  <div id="alerts">Loading alerts...</div> 
+</div>
+
+<div id="modal" class="modal hidden">
+  <div class="modal-content">
+    <button id="close-modal">&times;</button>
+    <div id="modal-text"></div>
+  </div>
+</div>
+
+  <script src="script.js"></script>
+</body>
+</html>
