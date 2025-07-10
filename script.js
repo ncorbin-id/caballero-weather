@@ -11,11 +11,11 @@ async function getWeather() {
     const dewpointF = dewpointC !== null ? (dewpointC * 9 / 5) + 32 : null;
 
     document.getElementById("temp").textContent = tempF !== null
-      ? `Temp: ${tempF.toFixed(1)}°F`
-      : "Temp: N/A";
+      ? `Temperature: ${tempF.toFixed(0)}°F`
+      : "Temperature: N/A";
 
     document.getElementById("dew").textContent = dewpointF !== null
-      ? `Dewpoint: ${dewpointF.toFixed(1)}°F`
+      ? `Dewpoint: ${dewpointF.toFixed(0)}°F`
       : "Dewpoint: N/A";
 
     document.getElementById("desc").textContent = props.textDescription || "Conditions unknown";
