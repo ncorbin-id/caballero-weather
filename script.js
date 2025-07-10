@@ -1,11 +1,29 @@
+async function fetchStationProps(stationId) {
+  const url = `https://api.weather.gov/stations/${stationId}/observations/latest`;
+  const response = await fetch(url);
+  const data = await response.json();
+  return data.properties;
+}
+
 async function getWeather() {
   try {
-    const response = await fetch('https://api.weather.gov/stations/KDMA/observations/latest');
-    const data = await response.json();
-    const props = data.properties;
+    const primaryProps = await fetchStationProps("KDMA");
+    let tempC = primaryProps.temperature.value;
+    let dewpointC = primaryProps.dewpoint.value;
 
-    const tempC = props.temperature.value;
-    const dewpointC = props.dewpoint.value;
+    // If either value is missing, fetch from fallback
+    if (tempC === null || dewpointC === null) {
+      console.warn("Fetching fallback data from QHVA3 for missing values...");
+      const fallbackProps = await fetchStationProps("QHVA3");
+
+      if (tempC === null) {
+        tempC = fallbackProps.temperature.value;
+      }
+
+      if (dewpointC === null) {
+        dewpointC = fallbackProps.dewpoint.value;
+      }
+    }
 
     const tempF = tempC !== null ? (tempC * 9 / 5) + 32 : null;
     const dewpointF = dewpointC !== null ? (dewpointC * 9 / 5) + 32 : null;
@@ -18,12 +36,12 @@ async function getWeather() {
       ? `Dewpoint: ${dewpointF.toFixed(0)}°F`
       : "Dewpoint: N/A";
 
-    document.getElementById("desc").textContent = props.textDescription || "Conditions unknown";
+    document.getElementById("desc").textContent = primaryProps.textDescription || "Conditions unknown";
 
     const iconEl = document.getElementById("icon");
-    if (props.icon) {
-      iconEl.src = props.icon;
-      iconEl.alt = props.textDescription || "Weather icon";
+    if (primaryProps.icon) {
+      iconEl.src = primaryProps.icon;
+      iconEl.alt = primaryProps.textDescription || "Weather icon";
     } else {
       iconEl.remove();
     }
