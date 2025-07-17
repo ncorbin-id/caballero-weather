@@ -7,22 +7,22 @@
 <style>
   /* Load custom fonts */
   @font-face {
-    font-family: 'Josefin Sans Bold';
-    src: url('./Fonts/JosefinSans-Bold.woff') format('woff');
+    font-family: 'Karla';
+    src: url('./Fonts/Karla-Regular.woff') format('woff');
     font-weight: bold;
   }
 
   @font-face {
-    font-family: 'Public Sans';
-    src: url('./Fonts/PublicSans-Regular.woff') format('woff');
+    font-family: 'Karla Bold';
+    src: url('./Fonts/Karla-Bold.woff') format('woff');
     font-weight: normal;
   }
 
   body {
-    font-family: 'Public Sans', sans-serif;
+    font-family: 'Karla', sans-serif;
     color: #fff;
     padding: 1rem;
-    background: #f3eece;
+    background: transparent;
   }
 
   #weather-widget {
@@ -33,10 +33,11 @@
     border-radius: 8px;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
     max-width: 320px;
+    margin: 0 auto;
   }
 
   #weather-widget h2 {
-    font-family: 'Josefin Sans Bold', sans-serif;
+    font-family: 'Karla Bold', sans-serif;
     margin: 0 0 0.5rem 0;
     font-size: 1.3rem;
     color: #fff;
@@ -94,10 +95,13 @@
   background: #fff;
   color: #000;
   padding: 1rem;
-  max-width: 300px;
+  max-width: 90vw;
+  max-height: 80vh;
+  overflow-y: auto;
   border-radius: 6px;
   position: relative;
   font-size: 0.9rem;
+  box-sizing: border-box;
 }
 
 #close-modal {
@@ -116,7 +120,7 @@
 </head>
 <body>
   <div id="weather-widget">
-  <h2>Caballero County Parks</h2>
+  <h2>Current Conditions</h2>
   <div class="weather-content">
     <div class="weather-icon">
       <img id="icon" alt="Weather Icon" />

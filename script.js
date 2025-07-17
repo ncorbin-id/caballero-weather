@@ -1,3 +1,12 @@
+// Primary station ID
+const station1 = 'KDMA';
+
+// Secondary station ID
+const station2 = 'QHVA3';
+
+// Weather alert zone ID
+const alertZone = 'AZZ504'; 
+
 async function fetchStationProps(stationId) {
   const url = `https://api.weather.gov/stations/${stationId}/observations/latest`;
   const response = await fetch(url);
@@ -7,14 +16,14 @@ async function fetchStationProps(stationId) {
 
 async function getWeather() {
   try {
-    const primaryProps = await fetchStationProps("KDMA");
+    const primaryProps = await fetchStationProps(station1);
     let tempC = primaryProps.temperature.value;
     let dewpointC = primaryProps.dewpoint.value;
 
     // If either value is missing, fetch from fallback
     if (tempC === null || dewpointC === null) {
-      console.warn("Fetching fallback data from QHVA3 for missing values...");
-      const fallbackProps = await fetchStationProps("QHVA3");
+      console.warn("Fetching fallback data from secondary station for missing values...");
+      const fallbackProps = await fetchStationProps(station2);
 
       if (tempC === null) {
         tempC = fallbackProps.temperature.value;
@@ -53,7 +62,7 @@ async function getWeather() {
 }
 
 async function getAlerts() {
-  const zoneId = "AZZ504"; // Forecast zone for the area
+  const zoneId = alertZone; // Forecast zone for the area
   try {
     const response = await fetch(`https://api.weather.gov/alerts/active/zone/${zoneId}`);
     const data = await response.json();
