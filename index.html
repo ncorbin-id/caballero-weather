@@ -18,11 +18,12 @@
     font-weight: normal;
   }
 
-  body {
+  html,body {
     font-family: 'Karla', sans-serif;
-    color: #fff;
+    color: #fcf3c5;
     padding: 1rem;
     background: transparent;
+    overflow: visible;
   }
 
   #weather-widget {
@@ -40,7 +41,7 @@
     font-family: 'Karla Bold', sans-serif;
     margin: 0 0 0.5rem 0;
     font-size: 1.3rem;
-    color: #fff;
+    color: #fcf3c5;
   }
 
   .weather-content {
@@ -119,6 +120,7 @@
 
 </head>
 <body>
+  <div style="overflow: visible; width: 100%;">
   <div id="weather-widget">
   <h2>Current Conditions</h2>
   <div class="weather-content">
@@ -132,6 +134,7 @@
     </div>
   </div>
   <div id="alerts">Loading alerts...</div> 
+</div>
 </div>
 
 <div id="modal" class="modal hidden">
